@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Box, Chip } from '@mui/material';
+import React, { useState, useEffect, useMemo} from 'react';
+import { Container, Box } from '@mui/material';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 
 import Header from "./components/Header";
-import DashboardStats from "./components/DashboardStats";
-import DashboardMain from './components/DashboardMain';
 import GenericPageCrud from "./components/CrudPage/GenericCrudPage"
 import useCrud  from './hooks/useCrud';
 
+import getAppTheme from "./style/theme";
 import serviceConfig from "./configs/serviceConfig"
 
 function App() {
   const [currentTab, setCurrentTab] = useState(0);
+
+  const [mode, setMode] = useState('light');
 
   const services = useCrud('/servicos');
 
@@ -18,37 +20,34 @@ function App() {
     if (currentTab === 1) services.fetchData();
   }, [currentTab]);
 
+  const theme = useMemo(() => getAppTheme(mode), [mode]);
+
   return (
-    <Box sx={{ bgcolor: '#fcfcfc', minHeight: '100vh' }}>
-      <Header tabValue={currentTab} onTabChange={setCurrentTab} />
-      
-      <Container maxWidth={false} sx={{ mt: 4, pb: 4, px: { xs: 2, md: 5 } }}>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
+      <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
+        <Header tabValue={currentTab} onTabChange={setCurrentTab} mode={mode}/>
         
-        {/* Aba 0: Dashboard */}
-        {currentTab === 0 && (
-          <Box>
-            <DashboardStats />
-            <DashboardMain />
-          </Box>
-        )}
-        
-        {/* Aba 4: Servicos genericos */}
-        {currentTab === 1 && ( // Supondo que aba 1 seja Serviços
-          <GenericPageCrud 
-            title="Serviços"
-            subtitle="Controla todos os serviços disponibiliados"
-            buttonLabel="Adicionar Serviço"
-            searchPlaceholder="Buscar serviço"
-            columns={serviceConfig.columns}
-            formFields={serviceConfig.fields}
-            data={services.data}
-            onSave={services.handleSave}
-            onDelete={services.handleDelete}
-            onUpdate={services.handleEdit}
-          />
-        )}
-      </Container>
-    </Box>
+        <Container maxWidth={false} sx={{ mt: 4, pb: 4, px: { xs: 2, md: 5 } }}>
+          
+          {/* Aba 4: Servicos genericos */}
+          {currentTab === 3 && (
+            <GenericPageCrud 
+              title="Serviços"
+              subtitle="Controla todos os serviços disponibiliados"
+              buttonLabel="Adicionar Serviço"
+              searchPlaceholder="Buscar serviço"
+              columns={serviceConfig.columns}
+              formFields={serviceConfig.fields}
+              data={services.data}
+              onSave={services.handleSave}
+              onDelete={services.handleDelete}
+              onUpdate={services.handleEdit}
+            />
+          )}
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 }
 

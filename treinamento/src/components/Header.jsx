@@ -1,4 +1,4 @@
-import React from 'react'; // Removido o useState daqui, pois vem via props
+import React from 'react';
 import {
   AppBar,
   Toolbar,
@@ -11,53 +11,71 @@ import {
   Container
 } from '@mui/material';
 
-// Ícones
-import DashboardIcon from '@mui/icons-material/DashboardOutlined';
-import InventoryIcon from '@mui/icons-material/Inventory2Outlined';
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import IconButton from '@mui/material/IconButton';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-// Recebendo as props do App.js
-const Header = ({ tabValue, onTabChange }) => {
+import DashboardIcon from '@mui/icons-material/DashboardOutlined';
+import PeopleIcon from '@mui/icons-material/People';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import InventoryIcon from '@mui/icons-material/Inventory'; 
+import BuildIcon from '@mui/icons-material/Build';
+
+const Header = ({ tabValue, onTabChange, mode, toggleTheme}) => {
 
   const handleTabChange = (event, newValue) => {
-    onTabChange(newValue); // Notifica o App.js sobre a mudança
+    onTabChange(newValue);
   };
 
   return (
-    <AppBar position="static" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0', bgcolor: '#fff' }}>
+    <AppBar position="static" color="inherit" elevation={0} sx={{ borderBottom: '1px solid divider', bgcolor: 'background.header' }}>
       <Container maxWidth="xl">
-        {/* Linha Superior: Logo e Perfil */}
         <Toolbar sx={{ justifyContent: 'space-between', pt: 2, pb: 1, px: '0 !important' }}>
           <Box>
-            <Typography variant="h6" component="h1" sx={{ fontWeight: 600, color: '#001e3c', lineHeight: 1.2 }}>
-              Stock Control System
+            <Typography variant="h6" component="h1" sx={{ fontWeight: 600, color: 'primary.superDark', lineHeight: 1.2 }}>
+              Efeito Visual
             </Typography>
-            <Typography variant="body2" sx={{ color: '#666' }}>
-              Manage your inventory efficiently
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              Sistema de controle de estoque
             </Typography>
           </Box>
 
           <Stack direction="row" spacing={2} alignItems="center">
             <Box sx={{ textAlign: 'right' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600, lineHeight: 1 }}>
-                John Doe
+              <Typography variant="subtitle2" sx={{ fontWeight: 600, lineHeight: 1, color: 'text.primary' }}>
+                Guilherme
               </Typography>
-              <Typography variant="caption" sx={{ color: '#888' }}>
+              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                 Admin
               </Typography>
             </Box>
-            <Avatar sx={{ bgcolor: '#0061ff', width: 40, height: 40, fontSize: '0.9rem' }}>
-              JD
+            <Avatar sx={{ bgcolor: 'primary.main', width: 40, height: 40, fontSize: '0.9rem' }}>
+              GG
             </Avatar>
+
+            <IconButton 
+              onClick={toggleTheme} 
+              size="small" 
+              sx={{ 
+                border: 1, 
+                borderColor: 'divider',
+                borderRadius: 2, // Levemente arredondado para combinar com o estilo moderno
+                p: 0.5 
+              }}
+              color="primary"
+            >
+              {mode === 'dark' ? (
+                <LightModeIcon fontSize="small" sx={{ color: '#ffb100' }} /> // Sol amarelado
+              ) : (
+                <DarkModeIcon fontSize="small" sx={{ color: '#555' }} /> // Lua cinza
+              )}
+            </IconButton>
           </Stack>
         </Toolbar>
 
-        {/* Linha Inferior: Navegação (Tabs) */}
         <Box sx={{ mt: 1 }}>
           <Tabs
-            value={tabValue} // Usa o valor que vem do App.js
+            value={tabValue}
             onChange={handleTabChange}
             variant="scrollable"
             scrollButtons="auto"
@@ -68,7 +86,7 @@ const Header = ({ tabValue, onTabChange }) => {
                 marginRight: 4,
                 fontWeight: 500,
                 fontSize: '0.95rem',
-                color: '#555',
+                color: 'text.scondary',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -77,7 +95,7 @@ const Header = ({ tabValue, onTabChange }) => {
                 pb: 1.5,
               },
               '& .Mui-selected': {
-                color: '#1976d2 !important',
+                color: 'primary.light !important',
               },
               '& .MuiTabs-indicator': {
                 height: 3,
@@ -86,10 +104,10 @@ const Header = ({ tabValue, onTabChange }) => {
             }}
           >
             <Tab icon={<DashboardIcon fontSize="small" />} iconPosition="start" label="Dashboard" />
-            <Tab icon={<InventoryIcon fontSize="small" />} iconPosition="start" label="Products" />
-            <Tab icon={<SwapHorizIcon fontSize="small" />} iconPosition="start" label="Clients" />
-            <Tab icon={<WarningAmberIcon fontSize="small" />} iconPosition="start" label="Stock Alerts" />
-            <Tab icon={<QueryStatsIcon fontSize="small" />} iconPosition="start" label="Generic" />
+            <Tab icon={<ShoppingCartIcon fontSize="small" />} iconPosition="start" label="Vendas" />
+            <Tab icon={<InventoryIcon fontSize="small" />} iconPosition="start" label="Produtos" />
+            <Tab icon={<BuildIcon fontSize="small" />} iconPosition="start" label="Serviços" />
+            <Tab icon={<PeopleIcon fontSize="small" />} iconPosition="start" label="Clientes" />
           </Tabs>
         </Box>
       </Container>

@@ -6,7 +6,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 const FieldLabel = ({ children }) => (
-  <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, mb: 0.5, color: '#333', display: 'block' }}>
+  <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, mb: 0.5, color: 'text.primary', display: 'block' }}>
     {children}
   </Typography>
 );
@@ -43,7 +43,7 @@ const GenericModal = ({ open, handleClose, title, fields, initialData, onSave, o
       }}
     >
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1.2rem', color: '#001e3c' }}>
+        <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1.2rem', color: 'primary.superDark' }}>
           {title}
         </Typography>
         <IconButton onClick={handleClose} size="small">
@@ -75,7 +75,7 @@ const GenericModal = ({ open, handleClose, title, fields, initialData, onSave, o
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
                       borderRadius: '10px',
-                      bgcolor: '#f9f9f9'
+                      bgcolor: 'background.default'
                     } 
                   }}
                 >
@@ -101,7 +101,7 @@ const GenericModal = ({ open, handleClose, title, fields, initialData, onSave, o
             borderRadius: 2, 
             fontWeight: 700,
             bgcolor: '#c13a25ff',
-            color: '#fff', 
+            color: 'primary.contrastText', 
             py: 1,
             '&:hover': { bgcolor: '#ab2b17ff' }
           }}
@@ -117,10 +117,10 @@ const GenericModal = ({ open, handleClose, title, fields, initialData, onSave, o
             textTransform: 'none', 
             borderRadius: 2, 
             fontWeight: 700, 
-            bgcolor: '#0061ff',
+            bgcolor: 'primary.main',
             color: '#fff', 
             py: 1,
-            '&:hover': { bgcolor: '#0056e0' }
+            '&:hover': { bgcolor: 'primary.dark' }
           }}
         >
           {initialData ? "Salvar Alterações" : "Criar Registro"}
