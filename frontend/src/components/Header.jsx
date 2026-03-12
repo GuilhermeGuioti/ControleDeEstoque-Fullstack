@@ -55,7 +55,21 @@ const Header = ({ tabValue, onTabChange, mode, toggleTheme}) => {
               GG
             </Avatar>
 
-            <BtnMode mode={mode} toggleTheme={toggleTheme}/>
+            <IconButton
+                onClick={toggleTheme}
+                sx={{
+                  border: "1px solid",
+                  borderColor: "divider",
+                  bgcolor: "background.paper",
+                  transition: "0.2s",
+                  "&:hover": {
+                    bgcolor: "action.hover",
+                    transform: "scale(1.03)",
+                  },
+                }}
+              >
+                {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+              </IconButton>
           </Stack>
         </Toolbar>
 
