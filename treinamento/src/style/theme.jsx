@@ -24,8 +24,8 @@ const lightPalette = {
 
 const darkPalette = {
    primary: {
-      main: '#90caf9',     
-      light: '#e3f2fd',
+      main: '#3f51b5',     
+      light: '#757de8',
       dark: '#42a5f5',
       superDark: '#e3f2fd',
       contrastText: 'rgba(0, 0, 0, 0.87)',
@@ -33,7 +33,6 @@ const darkPalette = {
    background: {
       default: '#121212', 
       header: '#1e1e1e',   
-      paper: '#1e1e1e',  
    },
    text: {
       primary: '#ffffff', 

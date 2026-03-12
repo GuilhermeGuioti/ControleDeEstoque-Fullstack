@@ -21,6 +21,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory'; 
 import BuildIcon from '@mui/icons-material/Build';
 
+import BtnMode from '../style/Button'
+
 const Header = ({ tabValue, onTabChange, mode, toggleTheme}) => {
 
   const handleTabChange = (event, newValue) => {
@@ -53,23 +55,7 @@ const Header = ({ tabValue, onTabChange, mode, toggleTheme}) => {
               GG
             </Avatar>
 
-            <IconButton 
-              onClick={toggleTheme} 
-              size="small" 
-              sx={{ 
-                border: 1, 
-                borderColor: 'divider',
-                borderRadius: 2, // Levemente arredondado para combinar com o estilo moderno
-                p: 0.5 
-              }}
-              color="primary"
-            >
-              {mode === 'dark' ? (
-                <LightModeIcon fontSize="small" sx={{ color: '#ffb100' }} /> // Sol amarelado
-              ) : (
-                <DarkModeIcon fontSize="small" sx={{ color: '#555' }} /> // Lua cinza
-              )}
-            </IconButton>
+            <BtnMode mode={mode} toggleTheme={toggleTheme}/>
           </Stack>
         </Toolbar>
 
